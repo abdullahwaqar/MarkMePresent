@@ -1,8 +1,7 @@
 package com.example.qrattendancesystem
 
-import android.annotation.SuppressLint
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -24,6 +23,7 @@ class MainActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return
             }
 
             override fun onPageScrolled(
@@ -31,14 +31,15 @@ class MainActivity : AppCompatActivity() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                return
             }
-
+//
             override fun onPageSelected(position: Int) {
-                when(position) {
-                    0 -> bottomNavigationView.selectedItemId = R.id.scanMenuId
-                    1 -> bottomNavigationView.selectedItemId = R.id.historyMenuId
-                    2 -> bottomNavigationView.selectedItemId = R.id.profileMenuId
+                bottomNavigationView.selectedItemId = when(position) {
+                    0 -> R.id.scanMenuId
+                    1 -> R.id.historyMenuId
+                    2 -> R.id.profileMenuId
+                    else -> R.id.scanMenuId
                 }
             }
         })
@@ -46,10 +47,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun setBottomNavigation() {
         bottomNavigationView.setOnNavigationItemSelectedListener {
-            when (it.itemId) {
-                R.id.scanMenuId -> viewPager.currentItem = 0
-                R.id.historyMenuId -> viewPager.currentItem = 1
-                R.id.profileMenuId -> viewPager.currentItem = 2
+            viewPager.currentItem = when (it.itemId) {
+                R.id.scanMenuId -> 0
+                R.id.historyMenuId -> 1
+                R.id.profileMenuId -> 2
+                else -> 0
             }
             return@setOnNavigationItemSelectedListener true
         }
