@@ -11,6 +11,12 @@ import com.example.qrattendancesystem.R
 
 class UserFragment : Fragment() {
 
+    companion object {
+        fun newInstance() : UserFragment{
+            return UserFragment()
+        }
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
