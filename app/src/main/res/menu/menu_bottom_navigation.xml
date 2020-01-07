@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/scanMenuId"
+        android:title="Scan"
+        android:icon="@drawable/ic_qrcode_solid"
+        />
+    <item android:id="@+id/historyMenuId"
+        android:title="History"
+        android:icon="@drawable/ic_history_solid"
+        />
+    <item android:id="@+id/profileMenuId"
+        android:title="Profile"
+        android:icon="@drawable/ic_user_solid"
+        />
+</menu>

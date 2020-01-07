@@ -3,7 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.qrattendancesystem">
 
-    <uses-permission android:name="andriod.permissions.CAMERA" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
