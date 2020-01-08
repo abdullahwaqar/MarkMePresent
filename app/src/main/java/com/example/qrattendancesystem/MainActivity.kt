@@ -59,5 +59,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun setViewPagerAdapter() {
         viewPager.adapter = MainPageAdapter(supportFragmentManager)
+        viewPager.offscreenPageLimit = 2
     }
 }

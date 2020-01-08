@@ -1,18 +1,21 @@
 package com.example.qrattendancesystem.scanner
 
-import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.Fragment
 import com.example.qrattendancesystem.R
-import com.google.zxing.integration.android.IntentIntegrator
+import com.google.zxing.Result
+import kotlinx.android.synthetic.main.fragment_qrscanner.view.*
+import me.dm7.barcodescanner.zxing.ZXingScannerView
 
-class QRScannerFragment : Fragment() {
+class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     private lateinit var renderView: View
-    private lateinit var scannerView: IntentIntegrator
+    private lateinit var scannerView: ZXingScannerView
 
     companion object {
         fun newInstance() : QRScannerFragment {
@@ -28,21 +31,48 @@ class QRScannerFragment : Fragment() {
         // Inflate the layout for this fragment
         renderView = inflater.inflate(R.layout.fragment_qrscanner, container, false)
         initializeQRScanner()
+//        onClicks()
+        print(renderView)
+        println("i am here but idk bro")
         return renderView.rootView
     }
 
-
     private fun initializeQRScanner() {
-        scannerView = IntentIntegrator.forSupportFragment(this)
-        scannerView?.setOrientationLocked(true)
-        scannerView?.initiateScan()
+        scannerView = ZXingScannerView(context!!) // Initialize the scanner view
+        scannerView.setResultHandler(this) // Tell scanner we handle the result in this class
+        // Set the configs
+        scannerView.setBackgroundColor(ContextCompat.getColor(context!!, R.color.colorTranslucent))
+        scannerView.setBorderColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
+        scannerView.setLaserColor(ContextCompat.getColor(context!!, R.color.colorPrimaryDark))
+        scannerView.setBorderStrokeWidth(10)
+        scannerView.setAutoFocus(true)
+        scannerView.setSquareViewFinder(true)
+
+        startQrCamera() // Start Qr Camera
+        renderView.containerScanner.addView(scannerView) // Add the scanner to the main renderer
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        val result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data)
-        print(result)
-        super.onActivityResult(requestCode, resultCode, data)
+    private fun startQrCamera() {
+        scannerView.startCamera()
     }
 
+    override fun onResume() {
+        super.onResume()
+        scannerView.setResultHandler(this) // Register ourselves as a handler for scan results.
+        scannerView.startCamera()          // Start camera on resume
+    }
 
+    override fun onPause() {
+        super.onPause()
+        scannerView.stopCamera() // On pause stop the camera
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        scannerView.stopCamera() // On pause stop the camera
+    }
+
+    override fun handleResult(rawResult: Result?) {
+        Toast.makeText(context!!, rawResult?.text, Toast.LENGTH_SHORT).show()
+    }
 }
