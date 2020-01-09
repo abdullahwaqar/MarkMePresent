@@ -23,7 +23,6 @@ class MainActivity : AppCompatActivity() {
         viewPager.addOnPageChangeListener(object : ViewPager.OnPageChangeListener {
             override fun onPageScrollStateChanged(state: Int) {
                 TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                return
             }
 
             override fun onPageScrolled(
@@ -31,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                return
+
             }
 //
             override fun onPageSelected(position: Int) {
