@@ -32,8 +32,6 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
         renderView = inflater.inflate(R.layout.fragment_qrscanner, container, false)
         initializeQRScanner()
 //        onClicks()
-        print(renderView)
-        println("i am here but idk bro")
         return renderView.rootView
     }
 
@@ -74,5 +72,6 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     override fun handleResult(rawResult: Result?) {
         Toast.makeText(context!!, rawResult?.text, Toast.LENGTH_SHORT).show()
+        scannerView.resumeCameraPreview(this)
     }
 }
