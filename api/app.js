@@ -2,6 +2,7 @@ const createError = require('http-errors');
 const express = require('express');
 const mongoose = require('mongoose');
 const logger = require('morgan');
+const cors = require('cors');
 const app = express();
 
 const indexRouter = require('./routes/index');
@@ -9,9 +10,13 @@ const indexRouter = require('./routes/index');
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(cors({
+    allowedHeaders: '*'
+}));
 
 mongoose.connect(require('./config/keys').DB_URL, {
-    useMongoClient: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }, function (err) {
     if (err) {
         console.error(err);

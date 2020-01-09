@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" type="text/css" href="https://bootswatch.com/4/litera/bootstrap.min.css">
+    <title>Mark Me Present.</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="/">Mark Me Present</a>
+    </nav>
+    <br>
+    <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm">
+            <!-- Form -->
+            <form>
+                <div class="form-group">
+                    <label for="className">Class Name</label>
+                    <input id="classNameInput" type="text" class="form-control" id="className" aria-describedby="classNameHelp" autocomplete="off">
+                    <small id="emailHelp" class="form-text text-muted">What is this class about? &#129300;</small>
+                </div>
+                <div class="form-group">
+                    <label for="teacherName">Teacher Name</label>
+                    <input id="teacherNameInput" type="text" class="form-control" id="teacherName" aria-describedby="teacherNameHelp" autocomplete="off">
+                </div>
+                <button id="submitBtn" class="btn btn-primary btn-block">Submit &#129321;</button>
+            </form>
+            <hr>
+                <div id="card" class="card" style="display: none;">
+                    <br>
+                    <div id="qrcode" src="" class="d-flex justify-content-center"></div>
+                    <hr>
+                    <div class="card-body">
+                    <strong id="qrDetails" class="card-text d-flex justify-content-center"></strong>
+                    </div>
+                </div>
+          </div>
+          <div class="col-sm">
+          </div>
+        </div>
+      </div>
+</div>
+<script type="text/javascript" src="index.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript" src="static/qrcode.min.js"></script>
+
+</body>
+</html>
