@@ -8,12 +8,24 @@
     tools:context=".ui.SplashScreen">
 
     <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:text="Mark Me Present"
+        android:textColor="@color/colorPrimaryDark"
+        app:layout_constraintEnd_toEndOf="@+id/mainLogo"
+        app:layout_constraintStart_toStartOf="@+id/mainLogo"
+        app:layout_constraintTop_toBottomOf="@+id/mainLogo" />
+
+    <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="52dp"
         android:text="QR Attendance System"
         android:textColor="@color/colorPrimaryDark"
+        android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="@+id/mainLogo"
         app:layout_constraintStart_toStartOf="@+id/mainLogo"
         app:layout_constraintTop_toBottomOf="@+id/mainLogo" />
@@ -34,7 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="220dp"
-        android:text=" By Abdullah Waqar"
+        android:text="{ By : Abdullah Waqar }"
         android:textColor="@color/colorAccentDark"
         android:textSize="8sp"
         app:layout_constraintEnd_toEndOf="@+id/textView"

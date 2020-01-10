@@ -22,8 +22,13 @@ class UserFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_user, container, false)
+        val flag = false
+        if (flag) {
+            // if user is not signed up
+            return inflater.inflate(R.layout.user_signup_fragment, container, false)
+        } else {
+            return inflater.inflate(R.layout.fragment_user, container, false)
+        }
     }
-
 
 }
