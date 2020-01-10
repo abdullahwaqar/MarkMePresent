@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import com.example.qrattendancesystem.MainActivity
 import com.example.qrattendancesystem.R
 import com.example.qrattendancesystem.auth.Login
+import com.example.qrattendancesystem.db.AppDatabase
 
 class SplashScreen : AppCompatActivity() {
 
@@ -91,9 +92,17 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun goToMainActivity() {
-        //* Load main activity if all things are normal
-        startActivity(Intent(this, Login::class.java))
-        finish()
+        val user = AppDatabase.getAppDatabase(this)?.getUserDAO()?.getUser()
+        println(user)
+        if (user == null) {
+            // User does not exist
+            startActivity(Intent(this, Login::class.java))
+            finish()
+        } else {
+            //* Load main activity if all things are normal
+            startActivity(Intent(this, MainActivity::class.java))
+            finish()
+        }
     }
 
     override fun onRestart() {

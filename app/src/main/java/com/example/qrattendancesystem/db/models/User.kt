@@ -4,21 +4,21 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "user")
 data class User(
 
     @PrimaryKey(autoGenerate = true)
-    val local_id : Int? = null,
+    var local_id : Int? = null,
 
     @ColumnInfo(name = "_id")
-    val _id : String?,
+    var _id : String?,
 
     @ColumnInfo(name = "name")
-    val name : String?,
+    var name : String?,
 
     @ColumnInfo(name = "roll_id")
-    val roll_id : String?,
+    var roll_id : String?,
 
     @ColumnInfo(name = "password")
-    val password : String?
+    var password : String?
 )
