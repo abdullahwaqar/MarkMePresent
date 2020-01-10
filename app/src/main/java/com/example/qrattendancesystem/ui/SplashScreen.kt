@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import com.example.qrattendancesystem.MainActivity
 import com.example.qrattendancesystem.R
+import com.example.qrattendancesystem.auth.Login
 
 class SplashScreen : AppCompatActivity() {
 
@@ -91,7 +92,7 @@ class SplashScreen : AppCompatActivity() {
 
     private fun goToMainActivity() {
         //* Load main activity if all things are normal
-        startActivity(Intent(this, MainActivity::class.java))
+        startActivity(Intent(this, Login::class.java))
         finish()
     }
 
