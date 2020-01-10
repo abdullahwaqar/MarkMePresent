@@ -9,7 +9,7 @@ import com.example.qrattendancesystem.db.models.User
 @Dao
 interface UserDAO {
 
-    @Query("SELECT * FROM User")
+    @Query("SELECT * FROM user")
     fun getUser(): User
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
