@@ -24,7 +24,7 @@ class Login : AppCompatActivity() {
         private var passwordField: TextInputEditText? = null
 
         private val client = OkHttpClient()
-        private val base_url = "http://192.168.8.102:3000/api/createstudent"
+        private val base_url = "http://192.168.8.101:3000/api/createstudent"
         private val JSON: MediaType = "application/json; charset=utf-8".toMediaType()
 
         private var user: User? = null

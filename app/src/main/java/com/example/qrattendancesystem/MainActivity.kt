@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
     private fun setViewPagerListener() {
         viewPager.addOnPageChangeListener(object : ViewPager.SimpleOnPageChangeListener() {
             override fun onPageSelected(position: Int) {
-                bottomNavigationView.selectedItemId = when(position) {
+                bottomNavigationView.selectedItemId = when (position) {
                     0 -> R.id.scanMenuId
                     1 -> R.id.historyMenuId
                     2 -> R.id.profileMenuId

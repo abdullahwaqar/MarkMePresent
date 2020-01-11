@@ -16,16 +16,19 @@ import com.example.qrattendancesystem.MainActivity
 import com.example.qrattendancesystem.R
 import com.example.qrattendancesystem.auth.Login
 import com.example.qrattendancesystem.db.AppDatabase
+import com.example.qrattendancesystem.db.models.User
 
 class SplashScreen : AppCompatActivity() {
 
     companion object {
         private const val CAMERA_PERMISSION_REQUEST_CODE = 123
+        private var user : User? = null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
+        user = AppDatabase.getAppDatabase(this)?.getUserDAO()?.getUser()
 
         Handler().postDelayed({
             checkPermissions()
@@ -33,13 +36,22 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun checkPermissions() {
-        //* */ Check if the user gave the permission
+        //* Check if the user gave the permission
         if (ActivityCompat.checkSelfPermission(this, permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
-            goToMainActivity()
+            checkActivity()
         } else {
             requestPermission()
         }
     }
+
+    private fun checkActivity() {
+        if (user == null) {
+            goToLogin()
+        } else {
+            goToMainActivity()
+        }
+    }
+
 
     private fun requestPermission() {
         ActivityCompat.requestPermissions(this, arrayOf(permission.CAMERA), CAMERA_PERMISSION_REQUEST_CODE)
@@ -54,7 +66,7 @@ class SplashScreen : AppCompatActivity() {
         if (requestCode == CAMERA_PERMISSION_REQUEST_CODE) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 //* If user grants permission go to main activity
-                goToMainActivity()
+                checkActivity()
             } else if (isUserPermanentlyDenied()) {
                 showGoToAppSettingDialog()
             }
@@ -92,22 +104,19 @@ class SplashScreen : AppCompatActivity() {
     }
 
     private fun goToMainActivity() {
-        val user = AppDatabase.getAppDatabase(this)?.getUserDAO()?.getUser()
-        println(user)
-        if (user == null) {
-            // User does not exist
-            startActivity(Intent(this, Login::class.java))
-            finish()
-        } else {
-            //* Load main activity if all things are normal
-            startActivity(Intent(this, MainActivity::class.java))
-            finish()
-        }
+        //* Load main activity if all things are normal
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 
     override fun onRestart() {
         super.onRestart()
         //* Check the permissions again
         checkPermissions()
+    }
+
+    private fun goToLogin() {
+        startActivity(Intent(this, Login::class.java))
+        finish()
     }
 }
