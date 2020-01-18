@@ -11,7 +11,7 @@ Generate a Class that generates a QR code, User scans the code and marks himself
 ### Some Screenshots
 Web Client Screenshot
 
-![webclient screenshot](https://github.com/abdullahwaqar/QRAttendanceSystem/blob/dev/doc/screenshots/webclient-ss.png)
+![webclient screenshot](https://github.com/abdullahwaqar/MarkMePresent/blob/dev/doc/screenshots/webclient-ss-rev2.png)
 
 #### **Disclaimer: The *server* and the *webclient* is for demoing purposes and may not include full functionality.**
 
