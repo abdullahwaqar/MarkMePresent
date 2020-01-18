@@ -8,6 +8,9 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.qrattendancesystem.R
+import com.example.qrattendancesystem.dialogs.DialogResult
+import com.example.qrattendancesystem.dialogs.QrCodeResultDialog
+import com.google.gson.GsonBuilder
 import com.google.zxing.Result
 import kotlinx.android.synthetic.main.fragment_qrscanner.view.*
 import me.dm7.barcodescanner.zxing.ZXingScannerView
@@ -16,9 +19,10 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
 
     private lateinit var renderView: View
     private lateinit var scannerView: ZXingScannerView
+    private lateinit var resultDialog: QrCodeResultDialog
 
     companion object {
-        fun newInstance() : QRScannerFragment {
+        fun newInstance(): QRScannerFragment {
             return QRScannerFragment()
         }
     }
@@ -30,9 +34,18 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
 
         // Inflate the layout for this fragment
         renderView = inflater.inflate(R.layout.fragment_qrscanner, container, false)
-        initializeQRScanner()
+        initializeViews()
 //        onClicks()
         return renderView.rootView
+    }
+
+    private fun initializeViews() {
+        initializeQRScanner()
+        setResultDialog()
+    }
+
+    private fun setResultDialog() {
+        resultDialog = QrCodeResultDialog(context!!)
     }
 
     private fun initializeQRScanner() {
@@ -71,7 +84,18 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
     }
 
     override fun handleResult(rawResult: Result?) {
-        Toast.makeText(context!!, rawResult?.text, Toast.LENGTH_SHORT).show()
+        onQrResult(rawResult?.text)
         scannerView.resumeCameraPreview(this)
+    }
+
+    private fun onQrResult(result: String?) {
+        if (result.isNullOrEmpty()) {
+            Toast.makeText(context!!, "Invalid Qr Code", Toast.LENGTH_SHORT).show()
+        } else {
+            println(result)
+            val gson = GsonBuilder().create()
+            val dialogResult = gson.fromJson(result, DialogResult::class.java)
+            resultDialog.show(dialogResult)
+        }
     }
 }

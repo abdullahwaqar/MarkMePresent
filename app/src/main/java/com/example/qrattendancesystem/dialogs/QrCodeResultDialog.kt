@@ -3,13 +3,12 @@ package com.example.qrattendancesystem.dialogs
 import android.app.Dialog
 import android.content.Context
 import com.example.qrattendancesystem.R
-import com.example.qrattendancesystem.db.models.QrResult
 import kotlinx.android.synthetic.main.qr_result_layout.*
 
 class QrCodeResultDialog(var context: Context) {
 
     private lateinit var dialog: Dialog
-    private var qrResult: QrResult? = null
+    private var qrResult: DialogResult? = null
 
     init {
         initDialog()
@@ -23,14 +22,19 @@ class QrCodeResultDialog(var context: Context) {
         onClicks() //Add on click listeners
     }
 
-    fun show(qrResult: QrResult) {
+    fun show(qrResult: DialogResult) {
         this.qrResult = qrResult
-
+        dialog.scannedId.text = qrResult._id
+        dialog.scannedDate.text = qrResult.class_date_time
+        dialog.scannedText.text = "${qrResult.class_name} Class, Started By Teacher: ${qrResult.teacher_name}"
+        dialog.show()
     }
 
     private fun onClicks() {
         dialog.markPresent.setOnClickListener {}
 
-        dialog.cancelDialog.setOnClickListener {}
+        dialog.cancelDialog.setOnClickListener {
+            dialog.dismiss()
+        }
     }
 }
