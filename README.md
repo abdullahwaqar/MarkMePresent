@@ -9,11 +9,11 @@ Generate a Class that generates a QR code, User scans the code and marks himself
 + Basic Web Client - (Vanilla Javascript)
 
 ### Some Screenshots
-Mobile App Screenshots
+##### Mobile App Screenshots
 
 <img src="https://github.com/abdullahwaqar/MarkMePresent/blob/dev/doc/screenshots/mobileapp-splashscreen.png" width=40%/> <img src="https://github.com/abdullahwaqar/MarkMePresent/blob/dev/doc/screenshots/mobileapp-scanresult.png" width=40%/>
 
-Web Client Screenshot
+##### Web Client Screenshot
 
 ![webclient screenshot](https://github.com/abdullahwaqar/MarkMePresent/blob/dev/doc/screenshots/webclient-ss-rev2.png)
 
