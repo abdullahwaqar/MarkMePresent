@@ -14,7 +14,7 @@ app.use(cors({
     allowedHeaders: '*'
 }));
 
-mongoose.connect(process.env.DB_URL, {
+mongoose.connect(process.env.DB_URL || require('./config/keys').DB_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }, function (err) {
