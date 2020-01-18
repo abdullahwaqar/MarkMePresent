@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000/api';
+const BASE_URL = 'https://temp-markmepresent.herokuapp.com/api';
 
 const submitBtn = document.getElementById('submitBtn');
 const qrDetails = document.getElementById('qrDetails');
