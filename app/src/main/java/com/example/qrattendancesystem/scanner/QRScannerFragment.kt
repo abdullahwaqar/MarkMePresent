@@ -35,7 +35,6 @@ class QRScannerFragment : Fragment(), ZXingScannerView.ResultHandler {
         // Inflate the layout for this fragment
         renderView = inflater.inflate(R.layout.fragment_qrscanner, container, false)
         initializeViews()
-//        onClicks()
         return renderView.rootView
     }
 
