@@ -2,10 +2,12 @@ package com.example.qrattendancesystem.dialogs
 
 import android.app.Dialog
 import android.content.Context
+import android.widget.Toast
 import com.example.qrattendancesystem.R
 import com.example.qrattendancesystem.db.AppDatabase
 import com.example.qrattendancesystem.db.models.QrResult
 import com.example.qrattendancesystem.db.models.User
+import com.google.gson.GsonBuilder
 import kotlinx.android.synthetic.main.qr_result_layout.*
 import okhttp3.*
 import okhttp3.MediaType.Companion.toMediaType
@@ -62,17 +64,21 @@ class QrCodeResultDialog(var context: Context) {
 
                 override fun onResponse(call: Call, response: Response) {
                     val body = response.body?.string()
-                    println(body)
+                    val gson = GsonBuilder().create()
+                    var response: ServerResponse = gson.fromJson(body, ServerResponse::class.java)
+                    //Save the result in database
+                    val writeResult: QrResult = QrResult(
+                        _id = qrResult?._id,
+                        attendance_id = response._id,
+                        class_name = qrResult?.class_name,
+                        teacher_name = qrResult?.teacher_name,
+                        class_date_time = response.class_date_time
+                    )
+                    AppDatabase.getAppDatabase(context)?.getQrResultDAO()?.insertQrResult(writeResult)
                 }
-
             })
-
-            // Make a network request
-
-            // Save the result in database
-//            val writeResult: QrResult = QrResult(
-//
-//            )
+            dialog.dismiss()
+            Toast.makeText(context, "You Marked Your Attendance Successfully.", Toast.LENGTH_LONG).show()
         }
 
         dialog.cancelDialog.setOnClickListener {
@@ -80,3 +86,10 @@ class QrCodeResultDialog(var context: Context) {
         }
     }
 }
+
+//{ "class_date_time":"2020-01-22T02:42:21.303Z", "_id":"5e27b6c898c4190017abe577", "class_id":"5e233b54ddfbf1001707d943", "student_id":"5e27b24e5e810f001744cfbe", "__v":0 }
+
+class ServerResponse(
+    val _id: String,
+    val class_date_time: String
+)

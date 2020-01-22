@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.qrattendancesystem.db.dao.QrResultDAO
 import com.example.qrattendancesystem.db.models.QrResult
 import com.example.qrattendancesystem.db.models.User
 import com.example.qrattendancesystem.db.models.doa.UserDAO
@@ -13,7 +14,7 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private const val DB_NAME = "qr_attendance_db"
-        private  var database : AppDatabase? = null
+        private var database: AppDatabase? = null
 
         fun getAppDatabase(context: Context): AppDatabase? {
             if (database == null) {
@@ -27,5 +28,6 @@ abstract class AppDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun getUserDAO() : UserDAO
+    abstract fun getUserDAO(): UserDAO
+    abstract fun getQrResultDAO(): QrResultDAO
 }

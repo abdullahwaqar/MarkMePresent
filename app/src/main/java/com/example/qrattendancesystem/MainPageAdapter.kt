@@ -18,7 +18,7 @@ class MainPageAdapter (fm: FragmentManager) : FragmentStatePagerAdapter(fm) {
                 QRScannerFragment.newInstance()
             }
             1 -> {
-                ScannedHistoryFragment.newInstance()
+                ScannedHistoryFragment.newInstance(ScannedHistoryFragment.ResultListType.ALL_RESULT)
             }
             2 -> {
                 UserFragment.newInstance()
