@@ -10,7 +10,7 @@ import com.example.qrattendancesystem.db.models.QrResult
 interface QrResultDAO {
 
     @Query("SELECT * FROM qr_result")
-    fun getQrResults(): QrResult
+    fun getQrResults(): List<QrResult>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun  insertQrResult(result : QrResult)
