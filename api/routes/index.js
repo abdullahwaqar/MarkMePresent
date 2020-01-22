@@ -35,7 +35,8 @@ router.post('/createstudent', async function(req, res) {
 });
 
 router.post('/markattendance/:classId/:studentId', async function(req, res) {
-    const { classId, studendId } = req.params;
+    const classId = req.params.classId
+    const studendId = req.params.studendId
     try {
         const newAttendance = new Attendance({
             class_id: classId,
