@@ -12,6 +12,9 @@ data class QrResult(
     @ColumnInfo(name = "_id")
     var _id : String?,
 
+    @ColumnInfo(name = "attendance_id")
+    var attendance_id: String?,
+
     @ColumnInfo(name = "class_name")
     var class_name: String?,
 

@@ -3,6 +3,7 @@ package com.example.qrattendancesystem.dialogs
 import android.app.Dialog
 import android.content.Context
 import com.example.qrattendancesystem.R
+import com.example.qrattendancesystem.db.models.QrResult
 import kotlinx.android.synthetic.main.qr_result_layout.*
 
 class QrCodeResultDialog(var context: Context) {
@@ -26,12 +27,20 @@ class QrCodeResultDialog(var context: Context) {
         this.qrResult = qrResult
         dialog.scannedId.text = qrResult._id
         dialog.scannedDate.text = qrResult.class_date_time
-        dialog.scannedText.text = "${qrResult.class_name} Class, Started By Teacher: ${qrResult.teacher_name}"
+        dialog.scannedText.text =
+            "${qrResult.class_name} Class, Started By Teacher: ${qrResult.teacher_name}"
         dialog.show()
     }
 
     private fun onClicks() {
-        dialog.markPresent.setOnClickListener {}
+        dialog.markPresent.setOnClickListener {
+            // Make a network request
+
+            // Save the result in database
+//            val writeResult: QrResult = QrResult(
+//
+//            )
+        }
 
         dialog.cancelDialog.setOnClickListener {
             dialog.dismiss()
