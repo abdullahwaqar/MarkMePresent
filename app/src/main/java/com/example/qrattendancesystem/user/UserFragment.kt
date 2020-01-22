@@ -38,7 +38,6 @@ class UserFragment : Fragment() {
     }
 
     private fun init() {
-        println(user)
         userIdView.text = user?._id
         nameView.text = user?.name
         rollidView.text = user?.roll_id
